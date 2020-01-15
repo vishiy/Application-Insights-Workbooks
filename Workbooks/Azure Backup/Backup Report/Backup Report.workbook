@@ -461,7 +461,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/summary-tab",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/summary-tab.workbook",
         "items": []
       },
       "conditionalVisibility": {
@@ -476,7 +476,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/backupitems-tab",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/backupitems-tab.workbook",
         "items": []
       },
       "conditionalVisibility": {
@@ -491,7 +491,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/jobdistribution-tab",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/jobdistribution-tab.workbook",
         "items": []
       },
       "conditionalVisibility": {
@@ -506,7 +506,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/policydetails-tab",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/policydetails-tab.workbook",
         "items": []
       },
       "conditionalVisibility": {
