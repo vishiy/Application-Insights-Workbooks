@@ -396,21 +396,6 @@
       "name": "Overview-ReportParameterBlock"
     },
     {
-      "type": 12,
-      "content": {
-        "version": "NotebookGroup/1.0",
-        "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/usage-tab",
-        "items": []
-      },
-      "conditionalVisibility": {
-        "parameterName": "TabName",
-        "comparison": "isEqualTo",
-        "value": "Usage"
-      },
-      "name": "usage group"
-    },
-    {
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
@@ -455,7 +440,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/summary-tab.workbook",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/summary-tab",
         "items": []
       },
       "conditionalVisibility": {
@@ -470,7 +455,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/backupitems-tab.workbook",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/backupitems-tab",
         "items": []
       },
       "conditionalVisibility": {
@@ -485,7 +470,22 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/jobdistribution-tab.workbook",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/usage-tab",
+        "items": []
+      },
+      "conditionalVisibility": {
+        "parameterName": "TabName",
+        "comparison": "isEqualTo",
+        "value": "Usage"
+      },
+      "name": "usage group"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "template",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/jobdistribution-tab",
         "items": []
       },
       "conditionalVisibility": {
@@ -500,7 +500,7 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "template",
-        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/policydetails-tab.workbook",
+        "loadFromTemplateId": "community-Workbooks/Azure Backup/Backup Report/policydetails-tab",
         "items": []
       },
       "conditionalVisibility": {
