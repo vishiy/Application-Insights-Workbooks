@@ -19,9 +19,6 @@
             "multiSelect": true,
             "quote": "'",
             "delimiter": ",",
-            "value": [
-              "/subscriptions/8ed48689-5827-47a3-aab0-22c9a606bbbc"
-            ],
             "typeSettings": {
               "additionalResourceOptions": [
                 "value::all"
@@ -43,9 +40,6 @@
             "query": "where type =~ 'microsoft.operationalinsights/workspaces' | project id",
             "crossComponentResources": [
               "{Subscriptions}"
-            ],
-            "value": [
-              "/subscriptions/8ed48689-5827-47a3-aab0-22c9a606bbbc/resourceGroups/testTiP/providers/Microsoft.OperationalInsights/workspaces/testTipLA"
             ],
             "typeSettings": {
               "additionalResourceOptions": []
