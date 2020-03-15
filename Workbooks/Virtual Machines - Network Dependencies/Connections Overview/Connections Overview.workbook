@@ -5,9 +5,6 @@
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
-        "crossComponentResources": [
-          "{Workspaces}"
-        ],
         "parameters": [
           {
             "id": "80a15801-7442-49f3-a82f-6e55849ec7fb",
@@ -60,7 +57,7 @@
             "version": "KqlParameterItem/1.0",
             "name": "HybridMode",
             "type": 1,
-            "value": "false",
+            "value": null,
             "isHiddenWhenLocked": true,
             "criteriaData": [
               {
@@ -137,8 +134,16 @@
             "isHiddenWhenLocked": true,
             "queryType": 0,
             "resourceType": "microsoft.operationalinsights/workspaces",
-            "value": null,
             "label": "Not Onboarded"
+          },
+          {
+            "id": "f770f4e0-251a-472d-b1b1-f3a4280f8068",
+            "version": "KqlParameterItem/1.0",
+            "name": "Computers",
+            "type": 1,
+            "description": "Use this computer name if passed in as notebook parameter",
+            "value": "",
+            "isHiddenWhenLocked": true
           }
         ],
         "style": "above",
@@ -163,10 +168,18 @@
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
-        "crossComponentResources": [
-          "{Workspaces}"
-        ],
         "parameters": [
+          {
+            "id": "9e4f9e08-eaa3-4ceb-bca9-90454ae20729",
+            "version": "KqlParameterItem/1.0",
+            "name": "Blank",
+            "type": 1,
+            "isHiddenWhenLocked": true,
+            "timeContext": {
+              "durationMs": 0
+            },
+            "timeContextFromParameter": "TimeRange"
+          },
           {
             "id": "addcec31-b7ac-4715-a78d-9b803f86af8a",
             "version": "KqlParameterItem/1.0",
@@ -302,14 +315,48 @@
             "label": "Computer Name Contains"
           },
           {
+            "id": "47f9331a-3ab9-468d-bb07-640d2e36bba3",
+            "version": "KqlParameterItem/1.0",
+            "name": "includeAllOption",
+            "type": 1,
+            "value": "",
+            "isHiddenWhenLocked": true,
+            "criteriaData": [
+              {
+                "condition": "if (Computers is empty ), result = '| union (datatable(Value:string, Display:string, isSelected:boolean)['*', 'All',true])'",
+                "criteriaContext": {
+                  "leftOperand": "Computers",
+                  "operator": "is Empty",
+                  "rightValType": "param",
+                  "resultValType": "static",
+                  "resultVal": "| union (datatable(Value:string, Display:string, isSelected:boolean)['*', 'All',true])"
+                }
+              },
+              {
+                "condition": "else result = Blank",
+                "criteriaContext": {
+                  "operator": "Default",
+                  "rightValType": "param",
+                  "resultValType": "param",
+                  "resultVal": "Blank"
+                }
+              }
+            ],
+            "timeContext": {
+              "durationMs": 0
+            },
+            "timeContextFromParameter": "TimeRange"
+          },
+          {
             "id": "b141bd6c-cd8d-488e-a5f6-83ab00d31161",
             "version": "KqlParameterItem/1.0",
-            "name": "Computers",
+            "name": "Computer",
+            "label": "Computers",
             "type": 2,
             "multiSelect": true,
             "quote": "'",
             "delimiter": ",",
-            "query": "VMConnection\r\n| where Computer contains '{ComputerNameContains}'\r\n| summarize by Computer\r\n| project Value = Computer, Display = Computer, isSelected = false\r\n| order by Display asc\r\n| union (datatable(Value:string, Display:string, isSelected:boolean)['*', 'All',true])",
+            "query": "VMConnection\r\n| where Computer contains '{ComputerNameContains}'\r\n| summarize by Computer\r\n| project Value = Computer, Display = Computer, isSelected = (Computer =~ '{Computers}')\r\n| order by Display asc\r\n{includeAllOption}",
             "crossComponentResources": [
               "{Workspaces}"
             ],
@@ -321,8 +368,7 @@
             },
             "timeContextFromParameter": "TimeRange",
             "queryType": 0,
-            "resourceType": "microsoft.operationalinsights/workspaces",
-            "value": null
+            "resourceType": "microsoft.operationalinsights/workspaces"
           },
           {
             "id": "488d1f86-cabc-4fcc-8dc9-9a2e5803fb20",
@@ -330,14 +376,30 @@
             "name": "ComputerFilter",
             "type": 1,
             "isRequired": true,
-            "query": "let computerFilter = iff('*' in ({Computers}), \"| where Computer contains '{ComputerNameContains}'\", \"| where Computer in ({Computers})\");\r\nprint(computerFilter)",
-            "crossComponentResources": [
-              "{Workspaces}"
-            ],
+            "value": "| where Computer contains ''",
             "isHiddenWhenLocked": true,
-            "queryType": 0,
-            "resourceType": "microsoft.operationalinsights/workspaces",
-            "value": null
+            "criteriaData": [
+              {
+                "condition": "if (Computer == '*'), result = '| where Computer contains '{ComputerNameContains}''",
+                "criteriaContext": {
+                  "leftOperand": "Computer",
+                  "operator": "==",
+                  "rightValType": "static",
+                  "rightVal": "*",
+                  "resultValType": "static",
+                  "resultVal": "| where Computer contains '{ComputerNameContains}'"
+                }
+              },
+              {
+                "condition": "else result = '| where Computer in ({Computer})'",
+                "criteriaContext": {
+                  "operator": "Default",
+                  "rightValType": "param",
+                  "resultValType": "static",
+                  "resultVal": "| where Computer in ({Computer})"
+                }
+              }
+            ]
           },
           {
             "id": "56ab6626-c12d-4de1-8a3d-8a6099db3cd3",
